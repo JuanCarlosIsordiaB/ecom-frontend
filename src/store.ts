@@ -6,6 +6,8 @@ interface Store {
   total: number;
   contents: ShoppingCart;
   addToCart: (product: Product) => void;
+  updateQuantity: (id: Product['id'], quantity: number) => void;
+  removeFromCart: (id: Product['id']) => void;
 }
 
 export const useStore = create<Store>()(
@@ -52,5 +54,29 @@ export const useStore = create<Store>()(
         contents,
       }));
     },
+    updateQuantity: (id, quantity) => {
+      
+      const contents = get().contents.map((item) => {
+        if (item.productId === id) {
+          return {
+            ...item,
+            quantity,
+          };
+        }
+        return item;
+      });
+      set(() => ({
+        contents,
+      }));
+    },
+    removeFromCart: (id) => {
+      const contents = get().contents.filter(
+        (item) => item.productId !== id
+      );
+      set(() => ({
+        contents,
+      }));
+    },
+
   }))
 );

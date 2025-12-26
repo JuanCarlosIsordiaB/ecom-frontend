@@ -38,3 +38,4 @@ const ShoppingCartCotentSchema = ProductSchema.pick({
 export const ShoppingCartSchema = z.array(ShoppingCartCotentSchema);
 
 export type ShoppingCart = z.infer<typeof ShoppingCartSchema>;
+export type CartItem = z.infer<typeof ShoppingCartCotentSchema>;
