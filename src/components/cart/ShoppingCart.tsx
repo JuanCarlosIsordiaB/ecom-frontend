@@ -7,7 +7,11 @@ export default function ShoppingCart() {
             Resumen de Venta
         </h2>
 
-        
+        <div>
+            <h3>Total {  }</h3>
+        </div>
+
+
 
     </>
   )
