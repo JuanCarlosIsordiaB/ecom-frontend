@@ -2,6 +2,7 @@
 
 import { useStore } from "@/store";
 import ShoppingCartItem from "./ShoppingCartItem";
+import Amount from "./Amount";
 
 export default function ShoppingCart() {
   const contents = useStore((state) => state.contents);
@@ -12,18 +13,27 @@ export default function ShoppingCart() {
       <h2 className="text-4xl font-bold text-gray-900 ">Resumen de Venta</h2>
 
       <div>
-        <h3>Total ${total}</h3>
+        {contents.length === 0 ? (
+          <p className="mt-4 text-gray-500">El carrito está vacío.</p>
+        ) : (
+          <>
+            <h3>Total ${total}</h3>
 
-
-        <div>
-          <ul role="list" className="text-sm mt-6 divide-y divide-gray-200 border-t border-gray-200 font-bold ">
-            {
-              contents.map((item) => (
-                <ShoppingCartItem key={item.productId} item={item} />
-              ))
-            }
-          </ul>
-        </div>
+            <div>
+              <ul
+                role="list"
+                className="text-sm mt-6 divide-y divide-gray-200 border-t border-gray-200 font-bold "
+              >
+                {contents.map((item) => (
+                  <ShoppingCartItem key={item.productId} item={item} />
+                ))}
+              </ul>
+              <dl>
+                <Amount label="Total" amount={total} />
+              </dl>
+            </div>
+          </>
+        )}
       </div>
     </>
   );

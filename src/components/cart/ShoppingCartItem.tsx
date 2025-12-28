@@ -18,6 +18,7 @@ export default function ShoppingCartItem({ item }: { item: CartItem }   ) {
           width={96}
           height={96}
           className="h-full w-full object-cover rounded-lg"
+          priority
         />
       </div>
       <div className="flex-auto space-y-2">

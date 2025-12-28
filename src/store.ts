@@ -6,8 +6,9 @@ interface Store {
   total: number;
   contents: ShoppingCart;
   addToCart: (product: Product) => void;
-  updateQuantity: (id: Product['id'], quantity: number) => void;
-  removeFromCart: (id: Product['id']) => void;
+  updateQuantity: (id: Product["id"], quantity: number) => void;
+  removeFromCart: (id: Product["id"]) => void;
+  calculateTotal: () => void;
 }
 
 export const useStore = create<Store>()(
@@ -23,8 +24,10 @@ export const useStore = create<Store>()(
       );
       console.log("Duplicated index:", duplicated);
       if (duplicated >= 0) {
-
-        if(get().contents[duplicated].quantity >= get().contents[duplicated].inventory) {
+        if (
+          get().contents[duplicated].quantity >=
+          get().contents[duplicated].inventory
+        ) {
           console.log("Cannot add more items, inventory limit reached.");
           return;
         }
@@ -38,7 +41,6 @@ export const useStore = create<Store>()(
           }
           return item;
         });
-
       } else {
         contents = [
           ...get().contents,
@@ -55,7 +57,6 @@ export const useStore = create<Store>()(
       }));
     },
     updateQuantity: (id, quantity) => {
-      
       const contents = get().contents.map((item) => {
         if (item.productId === id) {
           return {
@@ -68,15 +69,26 @@ export const useStore = create<Store>()(
       set(() => ({
         contents,
       }));
+
+      get().calculateTotal();
     },
     removeFromCart: (id) => {
-      const contents = get().contents.filter(
-        (item) => item.productId !== id
-      );
+      const contents = get().contents.filter((item) => item.productId !== id);
       set(() => ({
         contents,
       }));
-    },
 
+      get().calculateTotal();
+    },
+    calculateTotal: () => {
+      const total = get().contents.reduce((acc, item) => {
+        return acc + item.price * item.quantity;
+      }, 0);
+      set(() => ({
+        total,
+      }));
+
+
+    },
   }))
 );

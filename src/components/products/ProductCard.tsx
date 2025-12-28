@@ -18,6 +18,7 @@ export default function ProductCard({ product }: { product: Product }) {
                     height={300}
                     alt={product.name}
                     className="w-full h-48 object-cover rounded"
+                    priority
                 />
                 <div className="p-3 space-y-2">
                     <h3 className="text-xl font-bold text-gray-600">{product.name}</h3>
