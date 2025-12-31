@@ -3,11 +3,13 @@
 import { useStore } from "@/store";
 import ShoppingCartItem from "./ShoppingCartItem";
 import Amount from "./Amount";
+import CouponForm from "./CouponForm";
 
 export default function ShoppingCart() {
   const contents = useStore((state) => state.contents);
   const total = useStore((state) => state.total);
-  console.log("Shopping cart contents:", contents);
+  const discount = useStore((state) => state.discount);
+ // console.log("Shopping cart contents:", contents);
   return (
     <>
       <h2 className="text-4xl font-bold text-gray-900 ">Resumen de Venta</h2>
@@ -29,11 +31,19 @@ export default function ShoppingCart() {
                 ))}
               </ul>
               <dl>
+                {
+                  discount ? (
+                    <Amount label="Descuento" amount={-discount} discount={true} />
+                  ) : null
+                }
                 <Amount label="Total" amount={total} />
               </dl>
             </div>
+            <CouponForm />
           </>
         )}
+
+
       </div>
     </>
   );

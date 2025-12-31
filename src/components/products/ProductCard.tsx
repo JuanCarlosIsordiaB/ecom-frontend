@@ -13,7 +13,7 @@ export default function ProductCard({ product }: { product: Product }) {
         >
             <div>
                 <Image
-                    src={`${process.env.API_URL}/img/${product.image}`}
+                    src={`${process.env.NEXT_PUBLIC_API_URL}/img/${product.image}`}
                     width={400}
                     height={300}
                     alt={product.name}

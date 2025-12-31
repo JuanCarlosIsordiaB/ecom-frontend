@@ -39,3 +39,12 @@ export const ShoppingCartSchema = z.array(ShoppingCartCotentSchema);
 
 export type ShoppingCart = z.infer<typeof ShoppingCartSchema>;
 export type CartItem = z.infer<typeof ShoppingCartCotentSchema>;
+
+
+export const CouponResponseSchema = z.object({
+  name: z.string().default(""),
+  message: z.string(),
+  percenatge: z.coerce.number().min(0).max(100).default(0),
+})
+
+export type Coupon = z.infer<typeof CouponResponseSchema>;

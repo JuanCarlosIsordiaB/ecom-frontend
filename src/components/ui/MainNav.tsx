@@ -9,7 +9,7 @@ async function getCategories() {
     });
   const categories = await res.json();
   const parsedCategories = CategoriesResponseSchema.parse(categories);
-  console.log("Categories fetched:", parsedCategories);
+ // console.log("Categories fetched:", parsedCategories);
   if (!res.ok) {
     throw new Error("Failed to fetch categories");
   }
