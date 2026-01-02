@@ -71,6 +71,7 @@ export const useStore = create<Store>()(
       set(() => ({
         contents,
       }));
+      get().calculateTotal();
     },
     updateQuantity: (id, quantity) => {
       const contents = get().contents.map((item) => {
@@ -93,7 +94,7 @@ export const useStore = create<Store>()(
       set(() => ({
         contents,
       }));
-      if(!get().contents.length){
+      if (!get().contents.length) {
         get().clearOrder();
         return;
       }

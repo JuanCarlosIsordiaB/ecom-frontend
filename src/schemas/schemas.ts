@@ -21,7 +21,6 @@ export const CategoryWithProductsResponseSchema = CategorySchema.extend({
 
 export const CategoriesResponseSchema = z.array(CategorySchema);
 
-
 export type Product = z.infer<typeof ProductSchema>;
 
 /** Shopping Cart **/
@@ -33,18 +32,40 @@ const ShoppingCartCotentSchema = ProductSchema.pick({
 }).extend({
   productId: z.string(),
   quantity: z.number(),
-})
+});
 
 export const ShoppingCartSchema = z.array(ShoppingCartCotentSchema);
 
 export type ShoppingCart = z.infer<typeof ShoppingCartSchema>;
 export type CartItem = z.infer<typeof ShoppingCartCotentSchema>;
 
-
 export const CouponResponseSchema = z.object({
   name: z.string().default(""),
   message: z.string(),
   percenatge: z.coerce.number().min(0).max(100).default(0),
-})
+});
+
+const OrderContentSchema = z.object({
+  productId: z.string(),
+  quantity: z.number(),
+  price: z.number(),
+});
+export const OrderSchema = z.object({
+  total: z.number(),
+  coupon: z.string().default(""),
+  contents: z
+    .array(OrderContentSchema)
+    .min(1, { message: "El Carrito no puede ir vacio" }),
+});
+
+/** Success / Error Response */
+export const SuccessResponseSchema = z.object({
+  message: z.string(),
+});
+export const ErrorResponseSchema = z.object({
+  message: z.union([z.array(z.string()), z.string()]),
+  error: z.string(),
+  statusCode: z.number(),
+});
 
 export type Coupon = z.infer<typeof CouponResponseSchema>;

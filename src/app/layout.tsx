@@ -1,12 +1,11 @@
 import type { Metadata } from "next";
 import { Outfit } from "next/font/google";
 import "./globals.css";
+import ToastNotification from "@/components/ui/ToastNotification";
 
 const outfit = Outfit({
   subsets: ["latin"],
- 
 });
-
 
 export const metadata: Metadata = {
   title: "POS - Frontexn ",
@@ -20,9 +19,8 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body
-        className={`${outfit.className} bg-gray-200 min-h-screen` }
-      >
+      <body className={`${outfit.className} bg-gray-200 min-h-screen`}>
+        <ToastNotification />
         {children}
       </body>
     </html>

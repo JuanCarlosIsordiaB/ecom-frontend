@@ -8,7 +8,9 @@ type Params = Promise<{ categoryId: string }>;
 async function getProductsByCategory(categoryId: string) {
   const res = await fetch(
     `${process.env.API_URL}/categories/${categoryId}?products=true`,
-    { cache: "no-store" }
+    { next: {
+      tags: ['products-by-category']
+    } }
   );
   const json = await res.json();
   if(!res.ok) {
