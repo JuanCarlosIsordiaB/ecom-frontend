@@ -11,12 +11,10 @@ import { format } from "date-fns/format";
 export default async function SalesPage() {
   const queryClient = new QueryClient();
   const today = new Date();
-  const formattedDate = format(today.toString(), "yyyy-MM-dd");
-  await  queryClient.prefetchQuery({
+  const formattedDate = format(today, "yyyy-MM-dd");
+  await queryClient.prefetchQuery({
     queryKey: ["sales", formattedDate],
-    queryFn: async () => {
-      await getSalesByDate(formattedDate);
-    },
+    queryFn: () => getSalesByDate(formattedDate),
   });
   return (
     <>

@@ -84,5 +84,5 @@ export const TransactionResponseSchema = z.object({
 });
 
 export const TransactionsResponseSchema = z.array(TransactionResponseSchema);
-
+export type Transaction = z.infer<typeof TransactionResponseSchema>;
 export type Coupon = z.infer<typeof CouponResponseSchema>;
