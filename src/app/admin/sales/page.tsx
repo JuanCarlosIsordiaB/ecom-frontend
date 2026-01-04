@@ -1,3 +1,4 @@
+import { getSalesByDate } from "@/api";
 import TransactionFilter from "@/components/transactions/TransactionFilter";
 import Heading from "@/components/ui/Heading";
 import {
@@ -14,7 +15,7 @@ export default async function SalesPage() {
   await  queryClient.prefetchQuery({
     queryKey: ["sales", formattedDate],
     queryFn: async () => {
-        
+      await getSalesByDate(formattedDate);
     },
   });
   return (
