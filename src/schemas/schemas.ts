@@ -10,6 +10,12 @@ export const ProductSchema = z.object({
   categoryId: z.number().optional(),
 });
 
+export const ProductsResponseSchema = z.object({
+  data: z.array(ProductSchema),
+  pageTotal: z.number(),
+  total: z.number(),
+});
+
 export const CategorySchema = z.object({
   id: z.number(),
   name: z.string(),
