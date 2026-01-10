@@ -3,6 +3,7 @@ import Heading from "@/components/ui/Heading";
 import Pagination from "@/components/ui/Pagination";
 import { ProductsResponseSchema } from "@/schemas/schemas";
 import { isValidPage } from "@/utils";
+import Link from "next/dist/client/link";
 import { redirect } from "next/navigation";
 
 async function getProducts(take: number = 10, skip: number = 0) {
@@ -41,6 +42,7 @@ export default async function ProductsPage({
   }
   return (
     <>
+      <Link href="/admin/products/new" className="bg-green-400 px-2 py-3 rounded-md hover:bg-green-500 transition-colors" >+ Añadir Producto</Link>
       <Heading>Products Managing</Heading>
       <ProductsTable products={products.products} total={products.total} />
       <Pagination currentPage={Number(page)} totalPages={totalPages} />
